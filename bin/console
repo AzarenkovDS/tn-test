@@ -1,0 +1,31 @@
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use App\Command\Can\CanDesignerCommand;
+use App\Command\Can\CanDeveloperCommand;
+use App\Command\Can\CanManagerCommand;
+use App\Command\Can\CanTesterCommand;
+use App\Command\User\UserDesignerCommand;
+use App\Command\User\UserDeveloperCommand;
+use App\Command\User\UserManagerCommand;
+use App\Command\User\UserTesterCommand;
+use App\Entity\Employee\DesignerEmployee;
+use App\Entity\Employee\DeveloperEmployee;
+use App\Entity\Employee\ManagerEmployee;
+use App\Entity\Employee\TesterEmployee;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+$application->add(new CanDeveloperCommand(new DeveloperEmployee()));
+$application->add(new CanTesterCommand(new TesterEmployee()));
+$application->add(new CanDesignerCommand(new DesignerEmployee()));
+$application->add(new CanManagerCommand(new ManagerEmployee()));
+
+$application->add(new UserDeveloperCommand(new DeveloperEmployee()));
+$application->add(new UserTesterCommand(new TesterEmployee()));
+$application->add(new UserDesignerCommand(new DesignerEmployee()));
+$application->add(new UserManagerCommand(new ManagerEmployee()));
+
+$application->run();
